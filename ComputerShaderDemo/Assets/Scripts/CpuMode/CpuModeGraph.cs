@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CpuMode : MonoBehaviour
+public class CpuModeGraph : MonoBehaviour
 {
     [SerializeField]
     private Transform m_PointPrefab = default;

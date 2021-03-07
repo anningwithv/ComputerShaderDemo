@@ -1,5 +1,7 @@
-﻿#pragma kernel WaveKernel
+﻿//声明Kernel方法，每个ComputerShader至少包括一个Kernel方法
+#pragma kernel WaveKernel
 
+//HLSL中用于存储数据，可读可写的buffer，此处用来存储位置
 RWStructuredBuffer<float3> _Positions;
 
 uint _Resolution;
@@ -8,6 +10,7 @@ float _Step, _Time;
 
 #define PI 3.14159265358979323846
 
+//波函数，用来计算点的位置
 float3 Wave(float u, float v, float t) {
 	float3 p;
 	p.x = u;
@@ -16,7 +19,7 @@ float3 Wave(float u, float v, float t) {
 	return p;
 }
 
-float2 GetUV(uint3 id)
+float2 GetPositionXZ(uint3 id)
 {
 	return (id.xy + 0.5) * _Step - 1.0;
 }
@@ -29,9 +32,12 @@ void SetPosition(uint3 id, float3 position)
 	}
 }
 
+//[numthreads(x,y,z)] 线程组，总的线程数 = x * y * z
+//SV_DispatchThreadID 线程id标识  = SV_GroupID * 一个线程组的规格(numthreads) + SV_GroupThreadID
 [numthreads(8,8,1)]
 void WaveKernel(uint3 id : SV_DispatchThreadID)
 {
-	float2 uv = GetUV(id);
-	SetPosition(id, Wave(uv.x, uv.y, _Time));
+	float2 positionXZ = GetPositionXZ(id);
+	float3 position = Wave(positionXZ.x, positionXZ.y, _Time);
+	SetPosition(id, position);
 }

@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 647910341}
   - component: {fileID: 647910340}
   m_Layer: 0
-  m_Name: GpuMode
+  m_Name: GpuModeGraph
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 1371055242}
   - component: {fileID: 1371055241}
   m_Layer: 0
-  m_Name: CpuMode
+  m_Name: CpuModeGraph
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

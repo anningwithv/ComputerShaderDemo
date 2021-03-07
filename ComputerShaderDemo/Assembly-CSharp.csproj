@@ -62,9 +62,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CpuMode\CpuMode.cs" />
+    <Compile Include="Assets\Scripts\CpuMode\CpuModeGraph.cs" />
     <Compile Include="Assets\Scripts\CpuMode\PositionFunc.cs" />
-    <Compile Include="Assets\Scripts\GpuMode\GpuMode.cs" />
+    <Compile Include="Assets\Scripts\GpuMode\GpuModeGraph.cs" />
     <None Include="Assets\Point\CpuShader\PointCpuUnlitShader.shader" />
     <None Include="Assets\Point\CpuShader\PointCpuShader.shader" />
     <None Include="Assets\Point\GpuShader\PointGPUShader.shader" />
