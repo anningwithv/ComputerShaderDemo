@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GpuModeGraph : MonoBehaviour
 {
-    //用于渲染Mesh的材质
-    [SerializeField]
-    private Material m_Material = default;
-
     //单个点的mesh
     [SerializeField]
     private Mesh m_Mesh = default;
+
+    //用于渲染Mesh的材质
+    [SerializeField]
+    private Material m_Material = default;
 
     //图形分辨率
     [SerializeField, Range(10, 1000)]
@@ -19,6 +19,9 @@ public class GpuModeGraph : MonoBehaviour
     //用于计算点位置的Computershader
     [SerializeField]
     private ComputeShader m_ComputeShader = default;
+
+    //整个图形的大小
+    private const float m_GraphSize = 2;
 
     //图形中点的间隔大小
     private float m_StepSize;
@@ -37,7 +40,7 @@ public class GpuModeGraph : MonoBehaviour
 
     private void OnEnable()
     {
-        m_StepSize = 2f / m_Resolution;
+        m_StepSize = m_GraphSize / m_Resolution;
 
         //为ComputerBuffer申请空间(元素个数，单个元素占用的字节数) 目前存储的是物体位置vector3, 每个float占用4个字节
         m_PositionsBuffer = new ComputeBuffer(m_Resolution * m_Resolution, 3 * 4);
@@ -72,7 +75,7 @@ public class GpuModeGraph : MonoBehaviour
         //则处理所有的元素需要(m_Resolution*m_Resolution)/(8*8)个线程组, 则单个维度的大小为 m_Resolution / 8
         int groups = Mathf.CeilToInt(m_Resolution / 8f);
 
-        //激活ComputerShader
+        //激活ComputerShader中kernel方法
         m_ComputeShader.Dispatch(m_KernelIndex, groups, groups, 1);
 
         //设置渲染shader中的参数
@@ -80,7 +83,7 @@ public class GpuModeGraph : MonoBehaviour
         m_Material.SetFloat(stepId, m_StepSize);
 
         //进行GPU-Instancing绘制
-        var bounds = new Bounds(Vector3.zero, Vector3.one * (2f + 2f / m_Resolution));
+        var bounds = new Bounds(Vector3.zero, Vector3.one * (2f + m_StepSize));
         Graphics.DrawMeshInstancedProcedural(
             m_Mesh, 0, m_Material, bounds, m_Resolution * m_Resolution
         );
