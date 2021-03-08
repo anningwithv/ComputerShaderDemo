@@ -20,17 +20,17 @@ public class GpuModeGraph : MonoBehaviour
     [SerializeField]
     private ComputeShader m_ComputeShader = default;
 
-    //整个图形的大小
-    private const float m_GraphSize = 2;
-
-    //图形中点的间隔大小
-    private float m_StepSize;
-
     //使用ComputerBuffer将物体位置存储在GPU上
     private ComputeBuffer m_PositionsBuffer;
 
     //ComputerShader中Kernel方法入口
     private int m_KernelIndex = -1;
+
+    //整个图形的大小
+    private const float m_GraphSize = 2;
+
+    //图形中点的间隔大小
+    private float m_StepSize;
 
     //Shader中的变量id
     private readonly int positionsId = Shader.PropertyToID("_Positions");

@@ -30,22 +30,24 @@ Shader "Unlit/PointGpuUnlitShader"
                 float4 positionWS : TEXCOORD0;
             };
 
-            //#if defined(UNITY_PROCEDURAL_INSTANCING_ENABLED)
+            #if SHADER_TARGET >= 45
                 StructuredBuffer<float3> _Positions;
-            //#endif
+            #endif
 
             float _Step;
 
-            void ConfigureProcedural (uint id) {
-                //#if defined(UNITY_PROCEDURAL_INSTANCING_ENABLED)
+            void ConfigureProcedural (uint id) 
+			{
+				#if SHADER_TARGET >= 45
                     float3 position = _Positions[id];
 
                     unity_ObjectToWorld = 0.0;
-                    unity_ObjectToWorld._m03_m13_m23_m33 = float4(position, 1.0);
-                    unity_ObjectToWorld._m00_m11_m22 = _Step;
-                //#endif
+                    unity_ObjectToWorld._m03_m13_m23_m33 = float4(position, 1.0); //位置
+                    unity_ObjectToWorld._m00_m11_m22 = _Step; //缩放
+                #endif
             }
 
+			// SV_InstanceID：通过该id获取StructuredBuffer中对应的位置
             v2f vert (appdata v, uint iId : SV_InstanceID)
             {
                 ConfigureProcedural(iId);

@@ -150,10 +150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8970cfe8d09b0d44eb757a0d598e2eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ComputeShader: {fileID: 7200000, guid: 38e54c83d0950c74086f29caf152922c, type: 3}
-  m_Material: {fileID: 2100000, guid: ccee29938fb754699bf7cdeb2bda8c95, type: 2}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Material: {fileID: 2100000, guid: ccee29938fb754699bf7cdeb2bda8c95, type: 2}
   m_Resolution: 200
+  m_ComputeShader: {fileID: 7200000, guid: 38e54c83d0950c74086f29caf152922c, type: 3}
 --- !u!4 &647910341
 Transform:
   m_ObjectHideFlags: 0
@@ -179,6 +179,8 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -251,6 +253,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa5447681d2b1d4dbda597a82864050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CpuModeObj: {fileID: 1371055240}
+  m_GpuModeObj: {fileID: 647910339}
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95d7f9f586bd3d428c3117a3a08f0aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  f_UpdateInterval: 0.5
 --- !u!1 &1371055240
 GameObject:
   m_ObjectHideFlags: 0
